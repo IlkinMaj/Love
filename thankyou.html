@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thank You</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background-color: #ffc0cb; /* açıq çəhrayı fon */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+    position: relative;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  /* Böyük buket emoji */
+  #bigFlower {
+    font-size: 150px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: pulse 1s ease-in-out infinite;
+    z-index: 10;
+  }
+
+  @keyframes pulse {
+    0% { transform: translate(-50%, -50%) scale(1);}
+    50% { transform: translate(-50%, -50%) scale(1.2);}
+    100% { transform: translate(-50%, -50%) scale(1);}
+  }
+
+  /* Mesaj */
+  #message {
+    color: white;
+    font-size: 2rem;
+    opacity: 0;
+    transition: opacity 1s ease;
+    margin-top: 20px;
+    z-index: 5;
+  }
+
+  /* Kiçik animasiyalı ürəklər */
+  .heart {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    background-color: #ff69b4;
+  }
+  .heart::before, .heart::after {
+    content: "";
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    background-color: #ff69b4;
+    border-radius: 50%;
+  }
+  .heart::before { top: -12.5px; left: 0; }
+  .heart::after { left: 12.5px; top: 0; }
+
+  @keyframes float {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-800px); opacity: 0; }
+  }
+
+</style>
+</head>
+<body>
+
+<div id="bigFlower">🌷</div>
+<h1 id="message">You made me the happiest person in the world, Love!</h1>
+
+<script>
+  // Çoxlu kiçik ürəklər
+  function createHearts() {
+    for (let i = 0; i < 5; i++) {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * window.innerWidth + 'px';
+      heart.style.top = Math.random() * window.innerHeight + 'px';
+      heart.style.animation = `float ${4 + Math.random() * 3}s linear forwards`;
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 7000);
+    }
+  }
+  setInterval(createHearts, 300);
+
+  // Böyük buket və mesaj
+  window.onload = () => {
+    const bigFlower = document.getElementById('bigFlower');
+    const message = document.getElementById('message');
+
+    setTimeout(() => {
+      bigFlower.style.display = 'none';
+      message.style.opacity = 1;
+    }, 3000); // 3 saniyə buket görünür
+  }
+</script>
+
+</body>
+</html>
+
+
+
