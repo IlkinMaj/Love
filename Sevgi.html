@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Valentine</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 100px;
+      background-color: pink; /* Arxa fon çəhrayı */
+      overflow: hidden;
+    }
+    #buttons {
+      margin-top: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 18px;
+      margin: 10px;
+      cursor: pointer;
+    }
+    #loveMessage {
+      display: none;
+      margin-top: 30px;
+      font-size: 24px;
+      color: red;
+      font-weight: bold;
+    }
+    .heart {
+      position: absolute;
+      color: hotpink; /* Ürəklər çəhrayı */
+      font-size: 24px;
+      animation: floatUp 6s linear infinite;
+    }
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-800px) scale(1.5);
+        opacity: 0;
+      }
+    }
+    /* Yeni ekran */
+    #secondScreen {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: pink;
+      text-align: center;
+      padding-top: 200px;
+      font-size: 26px;
+      font-weight: bold;
+      color: deeppink;
+    }
+  </style>
+</head>
+<body>
+  <h1>“Will you complete me for the rest of my life?” ❤️</h1>
+  <div id="buttons">
+    <button id="yesBtn">Yes</button>
+    <button id="noBtn">No</button>
+  </div>
+  <div id="loveMessage">I love you so much, you are my everything ❤️</div>
+
+  <div id="secondScreen">
+    💖 I love you so much, I spent a lot of time without you and I don’t want to anymore.  
+    From now on, I will never leave you any chance  to say “Yes” to me.  
+    You are my everything 💖
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const loveMessage = document.getElementById("loveMessage");
+    const secondScreen = document.getElementById("secondScreen");
+
+    // "No" düyməsi üzərinə gələndə qaçsın
+    noBtn.addEventListener("mouseover", () => {
+      const x = Math.floor(Math.random() * 300) - 150;
+      const y = Math.floor(Math.random() * 200) - 100;
+      noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    });
+
+    // "Yes" düyməsinə basanda ikinci ekran açılsın
+    yesBtn.addEventListener("click", () => {
+      document.body.innerHTML = secondScreen.outerHTML; // bütün ekranı dəyiş
+      document.getElementById("secondScreen").style.display = "block";
+
+      // ürəklər ikinci ekranda da çıxsın
+      setInterval(createHeart, 300);
+    });
+
+    // Ürək animasiyası yaratmaq
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "❤";
+      heart.style.left = Math.random() * window.innerWidth + "px";
+      heart.style.top = window.innerHeight + "px";
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 6000);
+    }
+
+    // Başlanğıcda ürəklər çıxsın
+    setInterval(createHeart, 400);
+  </script>
+</body>
+</html>
